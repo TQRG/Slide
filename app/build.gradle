@@ -1,8 +1,38 @@
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def leafactorDir = properties.getProperty('leafactor.jar')
+        def spoonCoreDir = properties.getProperty('spoon-core.jar')
+        classpath files(leafactorDir)
+        classpath files(spoonCoreDir)
+        classpath group: 'net.lingala.zip4j', name: 'zip4j', version: '2.1.4'
+        classpath group: 'org.eclipse.aether', name: 'aether-api', version: '1.1.0'
+        classpath group: 'org.eclipse.aether', name: 'aether-api', version: '1.1.0'
+        classpath group: 'org.eclipse.aether', name: 'aether-util', version: '1.1.0'
+        classpath group: 'org.eclipse.aether', name: 'aether-impl', version: '1.1.0'
+        classpath group: 'org.eclipse.aether', name: 'aether-spi', version: '1.1.0'
+        classpath group: 'org.eclipse.aether', name: 'aether-transport-http', version: '1.1.0'
+        classpath group: 'org.eclipse.aether', name: 'aether-connector-basic', version: '1.1.0'
+        classpath group: 'org.eclipse.aether', name: 'aether-transport-file', version: '1.1.0'
+        classpath group: 'org.apache.maven', name: 'maven-aether-provider', version: '3.3.9'
+    }
+}
+
 plugins {
     id 'com.gladed.androidgitversion' version '0.4.5'
     id 'com.github.ben-manes.versions' version '0.20.0'
     id 'com.android.application'
     id 'com.devspark.robototextview.gradle-plugin'
+}
+
+apply plugin: com.leafactor.gradle.plugin.LeafactorCIPlugin
+
+launcherExtension {
+//    sourceOutputDirectory = project.projectDir.path + '\\build'
 }
 
 android {

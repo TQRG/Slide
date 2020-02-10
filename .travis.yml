@@ -1,25 +1,39 @@
-language: android
-
 sudo: true
+language: android
+dist: trusty
 
 env:
   global:
-  - MALLOC_ARENA_MAX=2
+    - MALLOC_ARENA_MAX=2
+
+jdk:
+  - oraclejdk8
 
 android:
   components:
-  - tools
-  - platform-tools
-
-  - build-tools-28.0.3
-  - android-28
-
-  - extra-android-m2repository
-  - extra-google-m2repository
-  - extra-google-google_play_services
+    - tools
+    - platform-tools
+    - build-tools-28.0.3
+    - android-28
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - extra-google-google_play_services
 
 notifications:
   email: false
-
 script:
-- ./gradlew assemble lint{With,No}GPlay{Debug,Release} test{With,No}GPlay{Debug,Release}UnitTest
+  - git config user.email "travis@travis.org"
+  - git config user.name "travis"
+  - REV=$(git rev-parse --short HEAD)
+  - git checkout -b "leafactor-refactoring-$REV"
+  - ./gradlew build
+  - ./gradlew refactor
+  - cd app/src
+  - git add .
+  - cd ../../
+  - git commit --allow-empty -m "Leafactor refactoring changes."
+  - git remote rm origin
+  - git remote add origin "https://moraispgsi:$GH_API_KEY@github.com/TQRG/Slide.git"
+  - git push origin "leafactor-refactoring-$REV"
+
+

@@ -177,8 +177,6 @@ import me.ccrama.redditslide.util.OnSingleClickListener;
 import me.ccrama.redditslide.util.SortingUtil;
 import me.ccrama.redditslide.util.SubmissionParser;
 
-import static me.ccrama.redditslide.UserSubscriptions.modOf;
-
 
 public class MainActivity extends BaseActivity
         implements NetworkStateReceiver.NetworkStateReceiverListener {
@@ -1603,7 +1601,7 @@ public class MainActivity extends BaseActivity
              * If the user is a known mod, show the "Moderation" drawer item quickly to
              * stop the UI from jumping
              */
-            if (modOf != null && !modOf.isEmpty() && Authentication.mod) {
+            if (UserSubscriptions.modOf != null && !UserSubscriptions.modOf.isEmpty() && Authentication.mod) {
                 header.findViewById(R.id.mod).setVisibility(View.VISIBLE);
             }
 //update notification badge
@@ -4909,7 +4907,7 @@ public class MainActivity extends BaseActivity
                 mod.setOnClickListener(new OnSingleClickListener() {
                     @Override
                     public void onSingleClick(View view) {
-                        if (modOf != null && !modOf.isEmpty()) {
+                        if (UserSubscriptions.modOf != null && !UserSubscriptions.modOf.isEmpty()) {
                             Intent inte = new Intent(MainActivity.this, ModQueue.class);
                             MainActivity.this.startActivity(inte);
                         }

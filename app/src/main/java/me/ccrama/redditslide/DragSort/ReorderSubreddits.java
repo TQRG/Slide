@@ -72,8 +72,6 @@ import me.ccrama.redditslide.UserSubscriptions;
 import me.ccrama.redditslide.Visuals.Palette;
 import me.ccrama.redditslide.util.LogUtil;
 
-import static me.ccrama.redditslide.UserSubscriptions.setPinned;
-
 public class ReorderSubreddits extends BaseActivityAnim {
 
     private CaseInsensitiveArrayList subs;
@@ -303,7 +301,7 @@ public class ReorderSubreddits extends BaseActivityAnim {
                         to = pinned.size();
                     }
                     pinned.add(to, item);
-                    setPinned(pinned);
+                    UserSubscriptions.setPinned(pinned);
                 }
             }
         });
