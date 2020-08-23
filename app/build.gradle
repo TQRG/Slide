@@ -1,8 +1,22 @@
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5'
+    }
+}
+
 plugins {
     id 'com.gladed.androidgitversion' version '0.4.5'
     id 'com.github.ben-manes.versions' version '0.20.0'
     id 'com.android.application'
     id 'com.devspark.robototextview.gradle-plugin'
+    id "tqrg.leafactor.ci" version "0.0.2"
+}
+
+launcherExtension {
+//    sourceOutputDirectory = project.projectDir.path + '\\build'
 }
 
 android {

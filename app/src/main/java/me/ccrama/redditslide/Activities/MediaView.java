@@ -79,8 +79,6 @@ import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.NetworkUtil;
 import me.ccrama.redditslide.util.ShareUtil;
 
-import static me.ccrama.redditslide.Activities.AlbumPager.readableFileSize;
-
 
 /**
  * Created by ccrama on 3/5/2015.
@@ -1265,7 +1263,7 @@ public class MediaView extends FullScreenActivity
                                     @Override
                                     public void onProgressUpdate(String imageUri, View view,
                                             int current, int total) {
-                                        size.setText(readableFileSize(total));
+                                        size.setText(AlbumPager.readableFileSize(total));
 
                                         ((ProgressBar) findViewById(R.id.progress)).setProgress(
                                                 Math.round(100.0f * current / total));

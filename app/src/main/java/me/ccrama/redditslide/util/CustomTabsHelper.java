@@ -26,9 +26,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.ccrama.redditslide.Fragments.SettingsHandlingFragment;
 import me.ccrama.redditslide.SettingValues;
-
-import static me.ccrama.redditslide.Fragments.SettingsHandlingFragment.LinkHandlingMode;
 
 /**
  * Helper class for Custom Tabs.
@@ -59,7 +58,7 @@ public class CustomTabsHelper {
      * @return The package name recommended to use for connecting to custom tabs related components.
      */
     public static String getPackageNameToUse(Context context) {
-        if (SettingValues.linkHandlingMode != LinkHandlingMode.CUSTOM_TABS.getValue()) return null;
+        if (SettingValues.linkHandlingMode != SettingsHandlingFragment.LinkHandlingMode.CUSTOM_TABS.getValue()) return null;
         if (sPackageNameToUse != null) return sPackageNameToUse;
 
         PackageManager pm = context.getPackageManager();

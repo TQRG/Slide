@@ -22,6 +22,7 @@ import me.ccrama.redditslide.Activities.Crosspost;
 import me.ccrama.redditslide.Activities.MakeExternal;
 import me.ccrama.redditslide.Activities.ReaderMode;
 import me.ccrama.redditslide.Activities.Website;
+import me.ccrama.redditslide.Fragments.SettingsHandlingFragment;
 import me.ccrama.redditslide.R;
 import me.ccrama.redditslide.Reddit;
 import me.ccrama.redditslide.SettingValues;
@@ -31,8 +32,6 @@ import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-
-import static me.ccrama.redditslide.Fragments.SettingsHandlingFragment.LinkHandlingMode;
 
 public class LinkUtil {
 
@@ -111,11 +110,11 @@ public class LinkUtil {
                 && SettingValues.isNight())) {
             Intent i = new Intent(contextActivity, ReaderMode.class);
             openIntentThemed(i, url, color, contextActivity, adapterPosition, submission);
-        } else if (SettingValues.linkHandlingMode == LinkHandlingMode.EXTERNAL.getValue()) {
+        } else if (SettingValues.linkHandlingMode == SettingsHandlingFragment.LinkHandlingMode.EXTERNAL.getValue()) {
             openExternally(url);
         } else {
             String packageName = CustomTabsHelper.getPackageNameToUse(contextActivity);
-            if (SettingValues.linkHandlingMode == LinkHandlingMode.CUSTOM_TABS.getValue()
+            if (SettingValues.linkHandlingMode == SettingsHandlingFragment.LinkHandlingMode.CUSTOM_TABS.getValue()
                     && packageName != null) {
                 openCustomTab(url, color, contextActivity, packageName);
             } else {

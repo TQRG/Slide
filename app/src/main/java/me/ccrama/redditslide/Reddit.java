@@ -49,9 +49,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.M;
-
 /**
  * Created by ccrama on 9/17/2015.
  */
@@ -153,7 +150,7 @@ public class Reddit extends MultiDexApplication implements Application.ActivityL
 
     public static BiMap<String, String> getInstalledBrowsers() {
         int packageMatcher =
-                SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.GET_DISABLED_COMPONENTS;
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PackageManager.MATCH_ALL : PackageManager.GET_DISABLED_COMPONENTS;
 
         final BiMap<String, String> browserMap = HashBiMap.create();
 
@@ -576,7 +573,7 @@ public class Reddit extends MultiDexApplication implements Application.ActivityL
     public static final String CHANNEL_SUBCHECKING   = "SUB_CHECK_NOTIFY";
 
     public void setupNotificationChannels() {
-        if (SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             // Each triple contains the channel ID, name, and importance level
             List<Triple<String, String, Integer>> notificationTripleList =
                     new ArrayList<Triple<String, String, Integer>>() {{

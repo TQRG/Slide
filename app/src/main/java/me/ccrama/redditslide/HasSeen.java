@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.net.Uri;
 
 import com.lusfold.androidkeyvaluestore.KVStore;
+import com.lusfold.androidkeyvaluestore.core.KVManagerImpl;
 import com.lusfold.androidkeyvaluestore.core.KVManger;
 import com.lusfold.androidkeyvaluestore.utils.CursorUtils;
 
@@ -16,11 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import me.ccrama.redditslide.Synccit.SynccitRead;
-
-import static com.lusfold.androidkeyvaluestore.core.KVManagerImpl.COLUMN_KEY;
-import static com.lusfold.androidkeyvaluestore.core.KVManagerImpl.TABLE_NAME;
-import static me.ccrama.redditslide.OpenRedditLink.formatRedditUrl;
-import static me.ccrama.redditslide.OpenRedditLink.getRedditLinkType;
 
 /**
  * Created by ccrama on 7/19/2015.
@@ -46,7 +42,7 @@ public class HasSeen {
                 // Check if KVStore has a key containing the fullname
                 // This is necessary because the KVStore library is limited and Carlos didn't realize the performance impact
                 Cursor cur = m.execQuery("SELECT * FROM ? WHERE ? LIKE '%?%' LIMIT 1",
-                        new String[] { TABLE_NAME, COLUMN_KEY, fullname });
+                        new String[] { KVManagerImpl.TABLE_NAME, KVManagerImpl.COLUMN_KEY, fullname });
                 boolean contains = cur != null && cur.getCount() > 0;
                 CursorUtils.closeCursorQuietly(cur);
 
@@ -77,7 +73,7 @@ public class HasSeen {
             // Check if KVStore has a key containing the fullname
             // This is necessary because the KVStore library is limited and Carlos didn't realize the performance impact
             Cursor cur = m.execQuery("SELECT * FROM ? WHERE ? LIKE '%?%' LIMIT 1",
-                    new String[] { TABLE_NAME, COLUMN_KEY, fullname });
+                    new String[] { KVManagerImpl.TABLE_NAME, KVManagerImpl.COLUMN_KEY, fullname });
             boolean contains = cur != null && cur.getCount() > 0;
             CursorUtils.closeCursorQuietly(cur);
 
@@ -114,7 +110,7 @@ public class HasSeen {
             seenTimes = new HashMap<>();
         }
 
-        Uri uri = formatRedditUrl(s);
+        Uri uri = OpenRedditLink.formatRedditUrl(s);
         String fullname = s;
         if (uri != null) {
             String host = uri.getHost();
@@ -123,7 +119,7 @@ public class HasSeen {
                 uri = uri.buildUpon().authority(host.substring(2)).build();
             }
 
-            OpenRedditLink.RedditLinkType type = getRedditLinkType(uri);
+            OpenRedditLink.RedditLinkType type = OpenRedditLink.getRedditLinkType(uri);
             List<String> parts = uri.getPathSegments();
 
             switch (type) {
